@@ -34,7 +34,7 @@
           <div class="form-item">
             <label class="form-label"><b class="color-red">*</b> 商品名称</label>
             <div class="input-block">
-              <input type="text" placeholder="请输入商品名称"/>
+              <input type="text" placeholder="请输入商品名称" v-model="form.name"/>
             </div>
           </div>
           <div class="form-item">
@@ -196,8 +196,6 @@
           <div class="form-item">
             <label class="form-label"><b class="color-red">*</b> 商品相册</label>
             <div class="input-block">
-              <Upload></Upload>
-              <Upload></Upload>
             </div>
           </div>
           <div class="form-item">
@@ -210,7 +208,7 @@
             <label class="form-label"></label>
             <div class="input-block">
               <button type="button" class="btn btn-primary" @click="step = 1">上一步</button>
-              <button type="button" class="btn">保 存</button>
+              <button type="button" class="btn" @click="onSave">保 存</button>
             </div>
           </div>
         </div>
@@ -219,6 +217,7 @@
   </div>
 </template>
 <script>
+import request from "@/utils/request"
 export default {
   props: ['cfg', 'idx'],
   data () {
@@ -227,7 +226,8 @@ export default {
       step: 0, // 上、下一步切换
       subList: [], // 商品属性集合
       form: {
-        saleType: 1
+        saleType: 1,
+        name: '',
       },
       natList: [
         {
@@ -269,7 +269,21 @@ export default {
       this.initList()
     },
     onSave () {
-      this.cfg.ok()
+      request({
+        url: './goods/add',
+        method: "post",
+        data: this.form
+      })
+      .then(response => {
+        if(response.data.status == 'success') {
+          this.$toast('新增成功')
+        } else {
+          this.$alert('新增失败')
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
     },
     onClose () {
       this.cfg.close()

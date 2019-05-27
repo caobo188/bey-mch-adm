@@ -58,7 +58,7 @@
     </div>
     <div class="page-content">
       <table>
-        <tbody>
+        <tbody v-for="(bill, idx) in billList" :key="idx">
           <tr>
             <td colspan="5" class="logist-list-title">
               <span>订单号：2016100956745345435</span>
@@ -96,21 +96,40 @@
   </div>
 </template>
 <script>
+import request from "@/utils/request"
 export default {
   name: 'billList',
   data () {
     return {
-      msg: ''
+      billList: []
     }
   },
+  created () {
+    this.getBillList()
+  },
   methods: {
+    getBillList () {
+      request({
+        url: './bill/list',
+        method: "post",
+        data: this.query
+      })
+      .then(rst => {
+        if(rst.data.status == 'success') {
+          this.billList = rst.data.data || []
+        } else {
+          this.$alert(rst.data.msg)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    },
     onDetail () {
       this.$layer.open('billDetail', '订单详情', {}, () => {})
     }
   },
   beforeCreate () {
-  },
-  created () {
   }
 }
 </script>

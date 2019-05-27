@@ -3,7 +3,7 @@ const express = require('express')
 //定义路由级中间件
 const router = express.Router()
 //引入数据模型模块
-const Adm = require('../models/admSchema')
+const Adm = require('../models/adm')
 
 //登录接口
 router.post('/login', (req, res) => {
@@ -35,7 +35,7 @@ router.post('/adm/add', (req, res) => {
   console.log(req.body)
 })
 
-// 查询管理员
+// 管理员列表
 router.post('/adm/list', (req, res) => {
   let query = {}
   Adm.find(query, (err, data) => {
