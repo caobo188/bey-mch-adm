@@ -1,0 +1,126 @@
+/*!
+ * ress.css • v1.2.2
+ * github.com/filipelinhares/ress
+ */
+
+
+/* # =================================================================
+   # Global selectors
+   # ================================================================= */
+
+*{
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+blockquote,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+pre,
+form,
+fieldset,
+legend,
+button,
+input,
+textarea,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+address,
+em,
+var,
+i,
+b,
+strong {
+  font-style: normal;
+  font-weight: normal;
+}
+
+small {
+  font-size: 12px;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+legend {
+  color: #000;
+}
+
+fieldset,
+img {
+  border: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button {
+  border: 0;
+}
+/*input placeholder提示文本样式*/
+
+::-webkit-input-placeholder {
+  color: #C0C4CC;
+}
+/* 使用webkit内核的浏览器 */
+
+:-moz-placeholder {
+  color: #C0C4CC;
+}
+/* Firefox版本4-18 */
+
+ ::-moz-placeholder {
+  color: #C0C4CC;
+}
+/* Firefox版本19+ */
+
+:-ms-input-placeholder {
+  color: #C0C4CC;
+}
+.pull-left{
+  float: left;
+}
+.pull-right{
+  float: right;
+}
+.clearfix:before, .clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+.text-center{
+  text-align: center !important;
+}
+.text-left{
+  text-align: left !important;
+}
+.text-right{
+  text-align: right !important;
+}
