@@ -68,11 +68,11 @@ export default {
     onSave () {
       request({
         url: './adm/add',
-        method: "post",
+        method: 'post',
         data: this.form
       })
-      .then(response => {
-        if(response.data.status == 'success') {
+      .then(rst => {
+        if(rst.data.status == 'success') {
           this.cfg.ok()
         } else {
           this.$alert('新增失败')

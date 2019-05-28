@@ -83,7 +83,7 @@
               </div>
             </td>
             <td>曹先生(1868926663)</td>
-            <td>总额：<span class="font-bold color-red">4450.00</span></td>
+            <td>总额：<span class="font-bold color-red">{{bill.amt}}</span></td>
             <td>待发货</td>
             <td>
               <a href="javascript: void(0)" @click="onDetail" class="margin-r-15">查看</a>

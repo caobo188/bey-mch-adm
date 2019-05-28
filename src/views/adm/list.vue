@@ -6,13 +6,13 @@
         <input type="text" placeholder="请填写管理员姓名关键字" v-model="query.nameLK"/>
       </div>
       <div class="inline-block">
-        <label>创建时间</label>
-        <div class="inline-block p-r-0">
-          <Date></Date>
-        </div>
+        <label>登录账号</label>
+        <input type="text" placeholder="请填写登录账号" v-model="query.regId"/>
       </div>
-      <button type="button" class="btn">搜 索</button>
-      <button type="button" class="btn btn-primary" @click="onAdd">添 加</button>
+      <div class="inline-block">
+        <button type="button" class="btn" @click="onFresh">搜 索</button>
+        <button type="button" class="btn btn-primary" @click="onAdd">添 加</button>
+      </div>
     </div>
     <div class="page-content">
       <table>
@@ -34,9 +34,8 @@
             <td>{{adm.email}}</td>
             <td>2019-05-22 11:05</td>
             <td>
-              <a href="javascript: void(0)" @click="onEdit" class="margin-r-15">编辑</a>
-              <a href="javascript: void(0)" class="margin-r-15">启用</a>
-              <a href="javascript: void(0)" @click="onDele">删除</a>
+              <a href="javascript: void(0)" @click="onEdit(idx)" class="margin-r-15">编辑</a>
+              <a href="javascript: void(0)" @click="onDele(idx)">删除</a>
             </td>
           </tr>
         </tbody>
@@ -55,7 +54,7 @@ export default {
         pageSize: 10,
         obyCreTime: 2,
         nameLK: '',
-        creTimeRG: ''
+        regId: ''
       },
       admList: []
     }
@@ -67,7 +66,7 @@ export default {
     getAdmList () {
       request({
         url: './adm/list',
-        method: "post",
+        method: 'post',
         data: this.query
       })
       .then(rst => {
@@ -84,16 +83,22 @@ export default {
     onAdd () {
       this.$layer.open('admAdd', '添加管理员', {}, () => {
         this.$toast('添加成功')
+        this.getAdmList()
       })
     },
     onEdit (i) {
-      this.$layer.open('admEdit', '编辑管理员', {}, () => {
+      let adm = this.admList[i]
+      this.$layer.open('admEdit', '编辑管理员', {id: adm._id}, () => {
         this.$toast('编辑成功')
+        this.getAdmList()
       })
     },
     onDele (i) {
       this.$confirm('确认删除该管理员？', () => {
       })
+    },
+    onFresh () {
+      this.getAdmList()
     }
   },
   beforeCreate () {
@@ -101,11 +106,4 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.avatar-img{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  vertical-align: middle;
-  margin-right: 5px;
-}
 </style>

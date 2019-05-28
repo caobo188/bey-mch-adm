@@ -9,12 +9,6 @@
           </div>
         </div>
         <div class="form-item">
-          <label class="form-label">所属角色</label>
-          <div class="input-inline">
-            <input type="text" placeholder="请输入所属角色" v-model="form.role"/>
-          </div>
-        </div>
-        <div class="form-item">
           <label class="form-label"><b class="color-red">*</b> 登录账号</label>
           <div class="input-inline">
             <input type="text" placeholder="请输入登录账号" v-model="form.regId"/>
@@ -52,30 +46,61 @@
   </div>
 </template>
 <script>
+import request from "@/utils/request"
 export default {
   props: ['cfg', 'idx'],
   data () {
     return {
       form: {
+        id: '',
         name: '',
+        mbl: '',
         regId: '',
         pwd: '',
-        mbl: '',
-        email: '',
-        avatar: '',
-        role: '',
-        status: 0,
-        mchId: ''
+        email: ''
       }
     }
   },
   beforeCreate () {
   },
   created () {
+    this.form.id = this.cfg.params.id
+    this.getAdm()
   },
   methods: {
+    getAdm () {
+      request({
+        url: `adm/${this.form.id}`,
+        method: 'get',
+        data: this.form
+      })
+      .then(rst => {
+        if(rst.data.status == 'success') {
+          this.form = rst.data.data || {}
+        } else {
+          this.$alert('新增失败')
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    },
     onSave () {
-      this.cfg.ok()
+      request({
+        url: './adm/upd',
+        method: 'put',
+        data: this.form
+      })
+      .then(rst => {
+        if(rst.data.status == 'success') {
+          this.cfg.ok()
+        } else {
+          this.$alert('更新失败失败')
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
     }
   }
 }

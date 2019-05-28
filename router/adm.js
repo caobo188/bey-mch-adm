@@ -37,9 +37,54 @@ router.post('/adm/add', (req, res) => {
 
 // 管理员列表
 router.post('/adm/list', (req, res) => {
+  let regId = req.body.regId
+  let nameLK = req.body.nameLK
+  let pageNum = req.body.pageNum
+  let pageSize = req.body.pageSize
+  // 检索条件，如果为空不赋值
   let query = {}
+  if (regId) {
+    query.regId = regId
+  }
+  if (nameLK) {
+    query.name = new RegExp(nameLK) // 模糊查询条件
+  }
   Adm.find(query, (err, data) => {
-    res.json({status: 'success', data: data, total: data.length})
+    if (err) {
+      res.json({tatus: 'fail', error: err})
+    } else {
+      res.json({status: 'success', data: data, total: data.length})
+    }
+  })
+})
+
+// 通过id获取单条数据
+router.get('/adm/:id', (req, res) => {
+  Adm.findById(req.params.id, (err, data) => {
+    if (err) {
+      res.json({tatus: 'fail', error: err})
+    } else {
+      res.json({status: 'success', data: data})
+    }
+  })
+})
+
+// 更新管理员
+router.put('/adm/upd', (req, res) => {
+  Adm.findOneAndUpdate({_id: req.body._id}, {
+    $set: {
+      name: req.body.name,
+      regId: req.body.regId,
+      mbl: req.body.mbl,
+      pwd: req.body.pwd,
+      email: req.body.email,
+    }
+  }, {new: true}, (err, data) => {
+    if (err) {
+      res.json({tatus: 'fail', error: err})
+    } else {
+      res.json({status: 'success', data: true})
+    }
   })
 })
 
