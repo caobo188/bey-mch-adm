@@ -70,7 +70,7 @@ router.get('/adm/:id', (req, res) => {
 })
 
 // 更新管理员
-router.put('/adm/upd', (req, res) => {
+router.post('/adm/upd', (req, res) => {
   Adm.findOneAndUpdate({_id: req.body._id}, {
     $set: {
       name: req.body.name,
@@ -80,6 +80,17 @@ router.put('/adm/upd', (req, res) => {
       email: req.body.email,
     }
   }, {new: true}, (err, data) => {
+    if (err) {
+      res.json({tatus: 'fail', error: err})
+    } else {
+      res.json({status: 'success', data: true})
+    }
+  })
+})
+
+// 删除一条
+router.get('/adm/del/:id', (req, res) => {
+  Adm.findOneAndRemove({_id: req.params.id}, (err, data) => {
     if (err) {
       res.json({tatus: 'fail', error: err})
     } else {

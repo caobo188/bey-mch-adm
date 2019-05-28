@@ -71,8 +71,7 @@ export default {
     getAdm () {
       request({
         url: `adm/${this.form.id}`,
-        method: 'get',
-        data: this.form
+        method: 'get'
       })
       .then(rst => {
         if(rst.data.status == 'success') {
@@ -88,7 +87,7 @@ export default {
     onSave () {
       request({
         url: './adm/upd',
-        method: 'put',
+        method: 'post',
         data: this.form
       })
       .then(rst => {
