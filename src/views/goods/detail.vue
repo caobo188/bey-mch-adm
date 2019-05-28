@@ -1,219 +1,157 @@
 <template>
-  <div class="detail">
-    <el-button type="success" class="goback" icon="el-icon-arrow-left" @click="goback">返回上一页</el-button>
-    <el-carousel :interval="2000" type="card" height="300px" indicator-position="outside">
-      <el-carousel-item v-for="(item, index) in imgArr" :key="index">
-        <img :src="item" alt class="imgClass">
-      </el-carousel-item>
-    </el-carousel>
-    <main class="clearfix">
-      <section class="main-left">
-        <h3 class="detail-title">召唤师名称：</h3>
-        <p class="detail-introduct">{{name}}</p>
-        <h3 class="detail-title">背景介绍：</h3>
-        <p class="detail-introduct ">{{explain}}</p>
-      </section>
-      <section class="main-right">
-          <h3 class="detail-title nomargin">个人介绍:<span class="email">邮箱:ruiwei88888@163.com</span></h3>
-          <section id="echartArea">
-
-          </section>
-      </section>
-    </main>
+  <div class="detail-frame" :style="{zIndex: idx}">
+    <div class="page-content">
+      <div class="detail-item">
+        <div class="detail-item-title">商品编号</div>
+        <div class="detail-block">2016100956745345435</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">商品名称</div>
+        <div class="detail-block">OPPO R9 4GB+64GB内存版 雪岩灰 全网通4G手机 双卡双待</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">副标题</div>
+        <div class="detail-block">全网通4G手机 双卡双待</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">商品介绍</div>
+        <div class="detail-block">全网通4G手机 双卡双待</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">产品分类</div>
+        <div class="detail-block">手机数码/手机通讯/拍照手机</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">所属品牌</div>
+        <div class="detail-block">小米</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">创建时间</div>
+        <div class="detail-block">2018-04-09 15:44:01</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">更新时间</div>
+        <div class="detail-block">2018-04-09 15:44:01</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">发布状态</div>
+        <div class="detail-block">已上架</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">商品库存</div>
+        <div class="detail-block">
+          <table>
+            <thead>
+              <tr class="font-bold">
+                <td>颜色</td>
+                <td>大小</td>
+                <td>供货价</td>
+                <td>市场价</td>
+                <td>零售价</td>
+                <td>库存</td>
+                <td>已售</td>
+                <td>SKU编号</td>
+                <td>SPU值</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>红色</td>
+                <td>XL</td>
+                <td>20.00</td>
+                <td>25.00</td>
+                <td>24.00</td>
+                <td>50</td>
+                <td>22</td>
+                <td>201810221</td>
+                <td>223</td>
+              </tr>
+              <tr>
+                <td>红色</td>
+                <td>XL</td>
+                <td>20.00</td>
+                <td>25.00</td>
+                <td>24.00</td>
+                <td>50</td>
+                <td>22</td>
+                <td>201810221</td>
+                <td>223</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">属性图片</div>
+        <div class="detail-block">
+          <div class="product-prop-box">
+            <img src="../../../static/img/product.jpg" alt="" class="product-prop-pic"/>
+            <p>2000红色</p>
+          </div>
+          <div class="product-prop-box">
+            <img src="../../../static/img/product.jpg" alt="" class="product-prop-pic"/>
+            <p>2000红色</p>
+          </div>
+        </div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">上市年份</div>
+        <div class="detail-block"></div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">主材含量</div>
+        <div class="detail-block"></div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">适用对象</div>
+        <div class="detail-block"></div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">商品相册</div>
+        <div class="detail-block">
+          <span class="product-detail-pic-box"><img src="../../../static/img/product.jpg" alt="" class="product-detail-pic"/></span>
+          <span class="product-detail-pic-box"><img src="../../../static/img/product.jpg" alt="" class="product-detail-pic"/></span>
+        </div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-item-title">规格参数</div>
+        <div class="detail-block"></div>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
-// 引入 ECharts 主模块
-var echarts = require('echarts/lib/echarts');
-// 引入柱状图
-require('echarts/lib/chart/bar');
-require('echarts/lib/chart/pie');
-// 引入提示框和标题组件
-require('echarts/lib/component/tooltip');
-require('echarts/lib/component/title');
-
-
-import request from "@/utils/request";
 export default {
-  name: "detail",
-  data: function() {
+  props: ['cfg', 'idx'],
+  data () {
     return {
-      title: "欢迎来到得来联盟",
-      imgArr: [],
-      getHeroDetailUrl: "./getHeroDetail",
-      name: "",
-      flag: "",
-      explain: ""
-    };
+    }
+  },
+  beforeCreate () {
+  },
+  created () {
   },
   methods: {
-    getMessage(id) {
-      request({
-        url: `${this.getHeroDetailUrl}/${id}`,
-        method: "get",
-      })
-        .then(response => {
-            console.log(response)
-              this.imgArr = response.data.imgArr;
-              this.name = response.data.heroName;
-              this.flag = response.data.favourite;
-              this.explain = response.data.explain
-        })
-        .catch(error => {
-        });
-    },
-    goback() {
-      this.$router.go(-1);
-    }
-  },
-  mounted: function() {
-    this.getMessage(this.$route.params.id);
-
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('echartArea'));
-
-    console.log(myChart)
-    // 绘制图表
-    myChart.setOption({
-      backgroundColor: '#2c343c',
-
-    title: {
-        text: 'technology stack（个人技术栈）',
-        left: 'center',
-        top: 10,
-        textStyle: {
-            color: '#ccc'
-        },
-        subtext:"👆个人GitHub地址👆",
-        sublink:"https://github.com/weirui88888",
-        subtextStyle:{
-            color: '#fff',
-            fontSize:15,
-            fontFamily:'monospace',
-            fontStyle:"italic",
-            align:"right",
-        }
-    },
-
-    tooltip : {
-        trigger: 'item',
-        formatter: "{b}"
-    },
-
-    visualMap: {
-        show: false,
-        min: 80,
-        max: 600,
-        inRange: {
-            colorLightness: [0, 1]
-        }
-    },
-    series : [
-        {
-            name:'',
-            type:'pie',
-            radius : '60%',
-            center: ['50%', '50%'],
-            data:[
-                {value:3, name:'CSS'},
-                {value:3, name:'Vue全家桶'},
-                {value:3, name:'原生Javascript'},
-                {value:1, name:'Node.js（express）'},
-                {value:2, name:'Jquery'},
-                {value:2, name:'ES6'},
-                {value:2, name:'HTTP'},
-                {value:2, name:'前端性能优化'}
-            ].sort(function (a, b) { return a.value - b.value; }),
-            roseType: 'radius',
-            label: {
-                normal: {
-                    textStyle: {
-                        color: 'rgba(255,255,255,1)',
-                        fontSize:20
-                    }
-                }
-            },
-            labelLine: {
-                normal: {
-                    lineStyle: {
-                        color: 'rgba(255, 255, 255, 0.3)'
-                    },
-                    smooth: 0.2,
-                    length: 10,
-                    length2: 20
-                }
-            },
-            itemStyle: {
-                normal: {
-                    color: 'yellow',
-                    shadowBlur: 200,
-                    shadowColor: 'rgba(255, 0, 0, 0.5)'
-                }
-            },
-
-            animationType: 'scale',
-            animationEasing: 'elasticOut',
-            animationDelay: function (idx) {
-                return Math.random() * 200;
-            }
-        }
-    ]
-    });
   }
-};
+}
 </script>
-
-<style lang="scss">
-.detail {
-  width: 80%;
-  margin: 50px auto;
+<style lang="less" scoped>
+.product-detail-pic{
+  width: 150px;
+  height: 150px;
 }
-.imgClass {
-  width: 100%;
+.product-detail-pic-box{
+  margin-right: 10px;
 }
-.heroName {
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  font-style: italic;
-}
-.goback {
-  margin-bottom: 30px;
-}
-
-main{
-  padding: 50px 0;
-  .main-left{
-    width: 40%;
-    float: left;
+.product-prop-box{
+  display: inline-block;
+  margin-right: 10px;
+  img{
+    width: 120px;
+    height: 120px;
   }
-  .main-right{
-    width: 50%;
-    float: right;
-    .nomargin{
-        margin-bottom: 0;
-    }
-    .email{
-      float: right;
-    }
-  }
-  .detail-title{
-    background: #ccc;
-    padding: 10px 20px;
-  }
-  .detail-introduct{
-    line-height: 30px;
-    font-size: 20px;
-    font-style: italic;
-    text-indent: 2em;
-  }
-
-  #echartArea{
-    width: 100%;
-    height: 500px;
+  p{
+    font-weight: bold;
   }
 }
 </style>
-
-

@@ -55,11 +55,11 @@ export default {
         },
         {
           title: '添加商品',
-          href: '/product/add'
+          href: '/goods/add'
         },
         {
           title: '商品列表',
-          href: '/product/list'
+          href: '/goods/list'
         },
         {
           title: '仓库商品',

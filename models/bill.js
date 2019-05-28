@@ -3,6 +3,6 @@ var Schema = mongoose.Schema;
 
 var billSchema = new Schema({
   'billNo': String
-})
+}, {collection: 'bill'})
 
-module.exports = mongoose.model('bills', billSchema)
+module.exports = mongoose.model('bill', billSchema)

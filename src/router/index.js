@@ -31,9 +31,9 @@ let pages = [
   {path: '/sum/trade', meta: {title: '交易统计'}, component: resolve => { require(['@/views/sum/trade'], com => { com.default.name = hump('/sum/trade'); resolve(com) }) }},
   {path: '/sum/finance', meta: {title: '财务统计'}, component: resolve => { require(['@/views/sum/finance'], com => { com.default.name = hump('/sum/finance'); resolve(com) }) }},
   // 商品管理
-  {path: '/product/list', meta: {title: '商品列表'}, component: resolve => { require(['@/views/product/list'], com => { com.default.name = hump('/product/list'); resolve(com) }) }},
-  {path: '/product/add', meta: {title: '添加商品'}, component: resolve => { require(['@/views/product/add'], com => { com.default.name = hump('/product/add'); resolve(com) }) }},
-  {path: '/product/edit', meta: {title: '编辑商品'}, component: resolve => { require(['@/views/product/edit'], com => { com.default.name = hump('/product/edit'); resolve(com) }) }},
+  {path: '/goods/list', meta: {title: '商品列表'}, component: resolve => { require(['@/views/goods/list'], com => { com.default.name = hump('/goods/list'); resolve(com) }) }},
+  {path: '/goods/add', meta: {title: '添加商品'}, component: resolve => { require(['@/views/goods/add'], com => { com.default.name = hump('/goods/add'); resolve(com) }) }},
+  {path: '/goods/edit', meta: {title: '编辑商品'}, component: resolve => { require(['@/views/goods/edit'], com => { com.default.name = hump('/goods/edit'); resolve(com) }) }},
   {path: '/ware/list', meta: {title: '仓库商品'}, component: resolve => { require(['@/views/ware/list'], com => { com.default.name = hump('/ware/list'); resolve(com) }) }},
   {path: '/cate/list', meta: {title: '商品分类'}, component: resolve => { require(['@/views/cate/list'], com => { com.default.name = hump('/cate/list'); resolve(com) }) }},
   {path: '/group/list', meta: {title: '商品分组'}, component: resolve => { require(['@/views/group/list'], com => { com.default.name = hump('/group/list'); resolve(com) }) }},
@@ -84,7 +84,7 @@ let components = [
   // 物流管理
   {name: 'logisticsDetail', component: resolve => { require(['@/views/logistics/detail'], resolve) }},
   // 商品管理
-  {name: 'productDetail', component: resolve => { require(['@/views/product/detail'], resolve) }},
+  {name: 'goodsDetail', component: resolve => { require(['@/views/goods/detail'], resolve) }},
   // 商品评价
   {name: 'evaDetail', component: resolve => { require(['@/views/eva/detail'], resolve) }},
   // 商品分类

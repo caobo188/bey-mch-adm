@@ -52,7 +52,7 @@
           <div class="form-item">
             <label class="form-label"></label>
             <div class="input-block">
-              <router-link class="btn btn-primary" to="/product/list">返 回</router-link>
+              <router-link class="btn btn-primary" to="/goods/list">返 回</router-link>
               <button type="button" class="btn" @click="step = 1">下一步</button>
             </div>
           </div>

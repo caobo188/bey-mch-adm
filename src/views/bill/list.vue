@@ -61,7 +61,7 @@
         <tbody v-for="(bill, idx) in billList" :key="idx">
           <tr>
             <td colspan="5" class="logist-list-title">
-              <span>订单号：2016100956745345435</span>
+              <span>订单号：{{bill.billNo}}</span>
               <span>下单时间：2016-09-24 12:34:45</span>
               <span>付款时间：2016-09-24 12:35:45</span>
               <span>付款方式：支付宝</span>
