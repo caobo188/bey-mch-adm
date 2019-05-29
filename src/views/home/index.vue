@@ -81,7 +81,7 @@
 </template>
 <script>
 export default {
-  name: 'Index',
+  name: 'Home',
   data () {
     return {
     }

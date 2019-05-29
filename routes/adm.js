@@ -10,13 +10,22 @@ router.post('/login', (req, res) => {
   let regId = req.body.regId
   let pwd = req.body.pwd
   Adm.find({regId: regId}, (err, user) => {
-    console.log(err, user)
     if (user.length === 0) {
-      res.send({status: 'fail', msg: '账号不存在'})
+      res.send({
+        ok: false,
+        msg: '账号不存在'
+      })
     } else if (user[0].pwd === pwd) {
-      res.send({status: 'success', msg: '登录成功', code: 200})
+      res.send({
+        ok: true,
+        msg: '登录成功',
+        code: 200
+      })
     } else if (user[0].pwd !== pwd) {
-      res.send({status: 'fail', msg: '账号或密码错误'})
+      res.send({
+        ok: false,
+        msg: '账号或密码错误'
+      })
     }
   })
 })
@@ -24,15 +33,22 @@ router.post('/login', (req, res) => {
 // 添加管理员
 router.post('/adm/add', (req, res) => {
   // 使用Adm model上的create方法储存数据
-  console.log(req)
-  Adm.create(req.body, (err, hero) => {
+  req.body.creTime = new Date()
+  req.body.updTime = new Date()
+  Adm.create(req.body, (err, adm) => {
     if (err) {
-      res.json({tatus: 'fail', error: err})
+      res.json({
+        ok: false,
+        msg: err
+      })
     } else {
-      res.json({status: 'success', msg: '新增成功'})
+      res.json({
+        ok: true,
+        msg: '新增成功',
+        code: 200
+      })
     }
   })
-  console.log(req.body)
 })
 
 // 管理员列表
@@ -49,11 +65,26 @@ router.post('/adm/list', (req, res) => {
   if (nameLK) {
     query.name = new RegExp(nameLK) // 模糊查询条件
   }
-  Adm.find(query, (err, data) => {
-    if (err) {
-      res.json({tatus: 'fail', error: err})
+  let dataList = Adm.find(query)
+  // skip是跳过集合中前多少
+  dataList.skip((pageNum - 1) * pageSize)
+  // 限制返回数
+  dataList.limit(pageSize)
+  dataList.exec((err, data) => {
+    if(err) {
+      res.json({
+        ok: false,
+        msg: err
+      })
     } else {
-      res.json({status: 'success', data: data, total: data.length})
+      Adm.find(query, () => {
+        res.json({
+          ok: true,
+          data: data,
+          total: data.length,
+          code: 200
+        })
+      })
     }
   })
 })
@@ -62,15 +93,23 @@ router.post('/adm/list', (req, res) => {
 router.get('/adm/:id', (req, res) => {
   Adm.findById(req.params.id, (err, data) => {
     if (err) {
-      res.json({tatus: 'fail', error: err})
+      res.json({
+        ok: false,
+        msg: err
+      })
     } else {
-      res.json({status: 'success', data: data})
+      res.json({
+        ok: true,
+        data: data,
+        code: 200
+      })
     }
   })
 })
 
 // 更新管理员
 router.post('/adm/upd', (req, res) => {
+  req.body.updTime = new Date()
   Adm.findOneAndUpdate({_id: req.body._id}, {
     $set: {
       name: req.body.name,
@@ -81,9 +120,16 @@ router.post('/adm/upd', (req, res) => {
     }
   }, {new: true}, (err, data) => {
     if (err) {
-      res.json({tatus: 'fail', error: err})
+      res.json({
+        ok: false,
+        msg: err
+      })
     } else {
-      res.json({status: 'success', data: true})
+      res.json({
+        ok: true,
+        data: true,
+        code: 200
+      })
     }
   })
 })
@@ -92,9 +138,16 @@ router.post('/adm/upd', (req, res) => {
 router.get('/adm/del/:id', (req, res) => {
   Adm.findOneAndRemove({_id: req.params.id}, (err, data) => {
     if (err) {
-      res.json({tatus: 'fail', error: err})
+      res.json({
+        ok: false,
+        msg: err
+      })
     } else {
-      res.json({status: 'success', data: true})
+      res.json({
+        ok: true,
+        data: true,
+        code: 200
+      })
     }
   })
 })

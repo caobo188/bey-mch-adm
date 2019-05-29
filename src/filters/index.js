@@ -364,10 +364,32 @@ export function jobType (val) {
 }
 
 // 日期格式
-export function format (value, type) {
-  let date = String(value)
-  if (type === 'yyyy-MM-dd') {
-    return date.substring(0, 10)
+export function format (val, fmt) {
+  fmt = fmt || 'yyyy-MM-dd hh:mm:ss'
+  // 转为时间戳
+  let value = new Date(val).getTime()
+  if (value) {
+    let getDate = new Date(value)
+    let o = {
+      'M+': getDate.getMonth() + 1,
+      'd+': getDate.getDate(),
+      'h+': getDate.getHours(),
+      'm+': getDate.getMinutes(),
+      's+': getDate.getSeconds(),
+      'q+': Math.floor((getDate.getMonth() + 3) / 3),
+      'S': getDate.getMilliseconds()
+    }
+    if (/(y+)/.test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (getDate.getFullYear() + '').substr(4 - RegExp.$1.length))
+    }
+    for (let k in o) {
+      if (new RegExp('(' + k + ')').test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
+      }
+    }
+    return fmt
+  } else {
+    return ''
   }
 }
 
@@ -404,3 +426,4 @@ export function screenMode (val, type) {
     return ''
   }
 }
+

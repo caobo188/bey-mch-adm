@@ -32,7 +32,7 @@
             <td>{{adm.regId}}</td>
             <td>{{adm.mbl}}</td>
             <td>{{adm.email}}</td>
-            <td>2019-05-22 11:05</td>
+            <td>{{adm.creTime | format('yyyy-MM-dd hh:mm:ss')}}</td>
             <td>
               <a href="javascript: void(0)" @click="onEdit(idx)" class="margin-r-15">编辑</a>
               <a href="javascript: void(0)" @click="onDele(idx)">删除</a>
@@ -40,11 +40,11 @@
           </tr>
         </tbody>
       </table>
+      <Pager ref="pager" src="getAdmList"></Pager>
     </div>
   </div>
 </template>
 <script>
-import request from "@/utils/request"
 export default {
   name: 'admList',
   data () {
@@ -60,24 +60,11 @@ export default {
     }
   },
   created () {
-    this.getAdmList()
   },
   methods: {
     getAdmList () {
-      request({
-        url: './adm/list',
-        method: 'post',
-        data: this.query
-      })
-      .then(rst => {
-        if(rst.data.status == 'success') {
-          this.admList = rst.data.data || []
-        } else {
-          this.$alert(rst.data.msg)
-        }
-      })
-      .catch(error => {
-        console.log(error)
+      this.$refs.pager.getList(this.query, rst => {
+        this.admList = rst.data || []
       })
     },
     onAdd () {

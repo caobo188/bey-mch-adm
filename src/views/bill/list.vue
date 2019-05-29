@@ -91,38 +91,25 @@
             </td>
           </tr>
         </tbody>
+        <Pager ref="pager" src="getBillList"></Pager>
       </table>
     </div>
   </div>
 </template>
 <script>
-import request from "@/utils/request"
 export default {
-  name: 'billList',
+  name: 'BillList',
   data () {
     return {
       billList: []
     }
   },
   created () {
-    this.getBillList()
   },
   methods: {
     getBillList () {
-      request({
-        url: './bill/list',
-        method: "post",
-        data: this.query
-      })
-      .then(rst => {
-        if(rst.data.status == 'success') {
-          this.billList = rst.data.data || []
-        } else {
-          this.$alert(rst.data.msg)
-        }
-      })
-      .catch(error => {
-        console.log(error)
+      this.$refs.pager.getList(this.query, rst => {
+        this.billList = rst.data || []
       })
     },
     onDetail () {

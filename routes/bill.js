@@ -5,7 +5,19 @@ var Bill = require('../models/bill');
 
 router.post('/bill/list', function (req,res,next) {
   Bill.find({}, (err, data) => {
-    res.json({status: 'success', data: data, total: data.length})
+    if (err) {
+      res.json({
+        ok: false,
+        msg: err
+      })
+    } else {
+      res.json({
+        ok: true,
+        data: data,
+        total: data.length,
+        code: 200
+      })
+    }
   })
 })
 

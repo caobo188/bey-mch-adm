@@ -46,7 +46,6 @@
   </div>
 </template>
 <script>
-import request from "@/utils/request"
 export default {
   props: ['cfg', 'idx'],
   data () {
@@ -69,36 +68,13 @@ export default {
   },
   methods: {
     getAdm () {
-      request({
-        url: `adm/${this.form.id}`,
-        method: 'get'
-      })
-      .then(rst => {
-        if(rst.data.status == 'success') {
-          this.form = rst.data.data || {}
-        } else {
-          this.$alert('新增失败')
-        }
-      })
-      .catch(error => {
-        console.log(error)
+      this.$http.getAdm(this.form.id, (rst) => {
+        this.form = rst.data
       })
     },
     onSave () {
-      request({
-        url: './adm/upd',
-        method: 'post',
-        data: this.form
-      })
-      .then(rst => {
-        if(rst.data.status == 'success') {
-          this.cfg.ok()
-        } else {
-          this.$alert('更新失败失败')
-        }
-      })
-      .catch(error => {
-        console.log(error)
+      this.$http.updAdm(this.form, (rst) => {
+        this.cfg.ok()
       })
     }
   }

@@ -46,7 +46,6 @@
   </div>
 </template>
 <script>
-import request from "@/utils/request"
 export default {
   props: ['cfg', 'idx'],
   data () {
@@ -66,20 +65,8 @@ export default {
   },
   methods: {
     onSave () {
-      request({
-        url: './adm/add',
-        method: 'post',
-        data: this.form
-      })
-      .then(rst => {
-        if(rst.data.status == 'success') {
-          this.cfg.ok()
-        } else {
-          this.$alert('新增失败')
-        }
-      })
-      .catch(error => {
-        console.log(error)
+      this.$http.addAdm(this.form, (rst) => {
+        this.cfg.ok()
       })
     }
   }

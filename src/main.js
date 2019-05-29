@@ -8,9 +8,12 @@ import LayerPlugin from '@/plugins/layer-plugin'
 import AlertPlugin from '@/plugins/alert-plugin'
 import ConfirmPlugin from '@/plugins/confirm-plugin'
 import DialogsPlugin from '@/plugins/dialogs-plugin'
+
 import '@/styles/reset.css'
 import '@/styles/common.less'
 import * as filters from '@/filters/index.js'
+import http from '@/http/index.js'
+
 Vue.use(ToastPlugin)
 Vue.use(LayerPlugin)
 Vue.use(AlertPlugin)
@@ -43,7 +46,7 @@ Vue.prototype.imgURL = function (path, cate) {
   }
 }
 
-Vue.prototype.$http = window.http
+Vue.prototype.$http = window.http = http
 
 /* eslint-disable no-new */
 new Vue({

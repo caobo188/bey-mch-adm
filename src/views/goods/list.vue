@@ -84,11 +84,11 @@
           </tr>
         </tbody>
       </table>
+      <Pager ref="pager" src="getGoodsList"></Pager>
     </div>
   </div>
 </template>
 <script>
-import request from "@/utils/request"
 export default {
   name: 'GoodsList',
   data () {
@@ -106,24 +106,11 @@ export default {
   beforeCreate () {
   },
   created () {
-    this.getGoodsList()
   },
   methods: {
     getGoodsList () {
-      request({
-        url: './goods/list',
-        method: "post",
-        data: this.query
-      })
-      .then(rst => {
-        if(rst.data.status == 'success') {
-          this.goodsList = rst.data.data || []
-        } else {
-          this.$alert(rst.data.msg)
-        }
-      })
-      .catch(error => {
-        console.log(error)
+      this.$refs.pager.getList(this.query, rst => {
+        this.goodsList = rst.data || []
       })
     },
     onAdd () {

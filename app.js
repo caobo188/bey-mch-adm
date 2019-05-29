@@ -1,11 +1,12 @@
 const express = require('express')
-const adm = require('./router/adm')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
-let goods = require('./router/goods')
-let bill = require('./router/bill')
+// 导入路由 
+const adm = require('./routes/adm')
+let goods = require('./routes/goods')
+let bill = require('./routes/bill')
 
 //这一句是连接上数据库
 var db = mongoose.connect('mongodb://localhost:27017/meiyi')
@@ -19,6 +20,6 @@ app.use(cookieParser())
 app.use('/api', adm)
 app.use('/api', bill)
 app.use('/api', goods)
-app.listen(3000,() => {
+app.listen(3000, () => {
   console.log('app listening on port 3000.')
 })

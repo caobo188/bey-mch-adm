@@ -19,7 +19,7 @@ let routes = [
 // 页面路由
 let pages = [
   // 首页
-  {path: '/index', meta: {title: '首页'}, component: resolve => { require(['@/views/home/index'], resolve) }},
+  {path: '/home', meta: {title: '首页'}, component: resolve => { require(['@/views/home/index'], resolve) }},
   // 平台数据
   {path: '/business/list', meta: {title: '商圈列表'}, component: resolve => { require(['@/views/business/list'], com => { com.default.name = hump('/business/list'); resolve(com) }) }},
   {path: '/plat/set', meta: {title: '平台设置'}, component: resolve => { require(['@/views/plat/set'], com => { com.default.name = hump('/plat/set'); resolve(com) }) }},
