@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
-// 导入路由 
+// 导入控制层 服务器路由 
 const adm = require('./routes/adm')
 let goods = require('./routes/goods')
 let bill = require('./routes/bill')
