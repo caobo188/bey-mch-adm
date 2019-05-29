@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import request from '@/utils/request'
 export default {
   data () {
     return {
@@ -37,22 +36,10 @@ export default {
   methods: {
     // 登录
     onLogin () {
-      request({
-          url: './login',
-          method: 'post',
-          data: this.form,
-        })
-        .then(rst => {
-          if (rst.data.code === 200) {
-            this.$toast('登录成功')
-            this.$goto('Home', 1500)
-          } else {
-            this.$alert(rst.data.msg)
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+      this.$http.login(this.form, (rst) => {
+        this.$toast('登录成功')
+        this.$goto('Home', 1000)
+      })
     }
   }
 }

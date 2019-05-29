@@ -35,7 +35,6 @@ router.post('/adm/add', (req, res) => {
   // 使用Adm model上的create方法储存数据
   req.body.creTime = new Date()
   req.body.updTime = new Date()
-  console.log(req.body)
   Adm.create(req.body, (err, adm) => {
     if (err) {
       res.json({
@@ -83,6 +82,7 @@ router.post('/adm/list', (req, res) => {
           ok: true,
           data: data,
           total: data.length,
+          pages: Math.ceil(data.length / pageSize),
           code: 200
         })
       })

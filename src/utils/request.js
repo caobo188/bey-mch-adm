@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { Message } from 'element-ui'
 // create an axios instance
 const service = axios.create({
   baseURL: 'http://localhost:8081/api', // url = base url + request url
@@ -38,7 +37,7 @@ service.interceptors.response.use(
       } else if (req.failCb) {
         req.failCb(res)
       } else {
-        console.log('请求错误：', res.msg)
+        console.log('请求错误：' + res.msg)
       }
     }
   },
@@ -49,3 +48,4 @@ service.interceptors.response.use(
 )
 
 export default service
+

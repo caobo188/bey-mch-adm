@@ -11,15 +11,14 @@ var APP_APIS = ['Adm', 'Goods', 'Bill']
 // 自定义API
 var CST_APIS = {
   'login': {
-    uri: APP_API_PREFIX + '/adm/login.do',
+    uri: '/login',
     type: 'post'
   }
 }
 
 // 登陆
 http.login = function (data, cb, fb) {
-  data.sysId = SYS_ID
-  http.post(APP_API_PREFIX + '/adm/login.do', data, cb, fb)
+  http.post('/login', data, cb, fb)
 }
 
 // GET

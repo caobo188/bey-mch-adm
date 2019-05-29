@@ -91,8 +91,8 @@
             </td>
           </tr>
         </tbody>
-        <Pager ref="pager" src="getBillList"></Pager>
       </table>
+      <Pager ref="pager" src="getBillList"></Pager>
     </div>
   </div>
 </template>

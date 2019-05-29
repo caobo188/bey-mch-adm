@@ -23,18 +23,30 @@ router.post('/goods/add', function (req,res,next) {
 
 // 获取商品
 router.post('/goods/list', function (req,res,next) {
-  Goods.find({}, (err, data) => {
-    if (err) {
+  let pageNum = req.body.pageNum
+  let pageSize = req.body.pageSize
+  // 检索条件
+  let query = {}
+  let dataList = Goods.find(query)
+  // skip是跳过集合中前多少
+  dataList.skip((pageNum - 1) * pageSize)
+  // 限制返回数
+  dataList.limit(pageSize)
+  dataList.exec((err, data) => {
+    if(err) {
       res.json({
         ok: false,
         msg: err
       })
     } else {
-      res.json({
-        ok: true,
-        data: data,
-        total: data.length,
-        code: 200
+      Goods.find(query, () => {
+        res.json({
+          ok: true,
+          data: data,
+          total: data.length,
+          pages: Math.ceil(data.length / pageSize),
+          code: 200
+        })
       })
     }
   })
