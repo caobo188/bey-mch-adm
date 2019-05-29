@@ -13,82 +13,6 @@ var CST_APIS = {
   'login': {
     uri: APP_API_PREFIX + '/adm/login.do',
     type: 'post'
-  },
-  'logout': {
-    uri: APP_API_PREFIX + '/adm/logout.do',
-    type: 'post'
-  },
-  'passwd': {
-    uri: APP_API_PREFIX + '/adm/password.do',
-    type: 'post'
-  },
-  'reset': {
-    uri: APP_API_PREFIX + '/adm/reset.do',
-    type: 'post'
-  },
-  'curMch': {
-    uri: APP_API_PREFIX + '/mch/cur.do'
-  },
-  'curAdm': {
-    uri: APP_API_PREFIX + '/adm/cur.do'
-  },
-  'totalSum': {
-    uri: APP_API_PREFIX + '/stat/total.do',
-    type: 'post'
-  },
-  'dailySum': {
-    uri: APP_API_PREFIX + '/stat/daily.do',
-    type: 'post'
-  },
-  'rfdTrade': {
-    uri: APP_API_PREFIX + '/trade/refund.do',
-    type: 'post'
-  },
-  'refundFee': {
-    uri: APP_API_PREFIX + '/pfee/refund.do',
-    type: 'post'
-  },
-  'rechrgRefund': {
-    uri: APP_API_PREFIX + '/rechrg/refund.do',
-    type: 'post'
-  },
-  'rechrgCard': {
-    uri: APP_API_PREFIX + '/pcard/rechrg.do',
-    type: 'post'
-  },
-  'calcFee': {
-    uri: APP_API_PREFIX + '/rule/calc.do',
-    type: 'post'
-  },
-  // 停车统计/会员统计
-  'sumCareg': {
-    uri: APP_API_PREFIX + '/careg/sum.do',
-    type: 'post'
-  },
-  // 缴费统计(汇总统计)
-  'sumPFee': {
-    uri: APP_API_PREFIX + '/pfee/sum.do',
-    type: 'post'
-  },
-  // 缴费统计(按天统计)
-  'dayPFee': {
-    uri: APP_API_PREFIX + '/pfee/day.do',
-    type: 'post'
-  },
-  'sumPflow': {
-    uri: APP_API_PREFIX + '/pflow/sum.do',
-    type: 'post'
-  },
-  'stationSpa': {
-    uri: APP_API_PREFIX + '/station/avail_spaces.do',
-    type: 'post'
-  },
-  'stationSpaCtrl': {
-    uri: APP_API_PREFIX + '/station/spaces_ctrl.do',
-    type: 'post'
-  },
-  'exptReady': {
-    uri: APP_API_PREFIX + '/export/ready.do'
   }
 }
 
@@ -103,7 +27,7 @@ http.get = function (url, params, okCb, failCb) {
   return request({
     url: url,
     method: 'get',
-    params: params || {},
+    data: params || {},
     okCb: okCb,
     failCb: failCb
   })
@@ -114,7 +38,7 @@ http.post = function (url, params, okCb, failCb) {
   return request({
     url: url,
     method: 'post',
-    params: params || {},
+    data: params || {},
     okCb: okCb,
     failCb: failCb
   })

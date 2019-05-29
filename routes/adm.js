@@ -35,6 +35,7 @@ router.post('/adm/add', (req, res) => {
   // 使用Adm model上的create方法储存数据
   req.body.creTime = new Date()
   req.body.updTime = new Date()
+  console.log(req.body)
   Adm.create(req.body, (err, adm) => {
     if (err) {
       res.json({

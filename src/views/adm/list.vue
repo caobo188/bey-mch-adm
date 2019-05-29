@@ -83,20 +83,9 @@ export default {
     onDele (i) {
       let adm = this.admList[i]
       this.$confirm('确认删除该管理员？', () => {
-        request({
-          url: `adm/del/${adm._id}`,
-          method: 'get'
-        })
-        .then(rst => {
-          if(rst.data.status == 'success') {
-            this.$toast('删除成功')
-            this.getAdmList()
-          } else {
-            this.$alert('新增失败')
-          }
-        })
-        .catch(error => {
-          console.log(error)
+        this.$http.delAdm(adm._id, rst => {
+          this.$toast('删除成功')
+          this.getAdmList()
         })
       })
     },

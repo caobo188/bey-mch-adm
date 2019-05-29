@@ -65,8 +65,8 @@ export default {
   },
   methods: {
     onSave () {
-      this.$http.addAdm(this.form, (rst) => {
-        this.cfg.ok()
+      this.$http.addAdm(this.form, rst => {
+        this.cfg.ok(rst)
       })
     }
   }
