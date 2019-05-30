@@ -1,5 +1,6 @@
+// 商品
 var mongoose = require('mongoose')
-var Schema = mongoose.Schema;
+var Schema = mongoose.Schema
 
 var goodsSchema = new Schema({
   name: String

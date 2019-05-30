@@ -3,40 +3,14 @@ const express = require('express')
 //定义路由级中间件
 const router = express.Router()
 //引入数据模型模块
-const Adm = require('../models/adm')
-
-//登录接口
-router.post('/login', (req, res) => {
-  let regId = req.body.regId
-  let pwd = req.body.pwd
-  Adm.find({regId: regId}, (err, user) => {
-    if (user.length === 0) {
-      res.send({
-        ok: false,
-        msg: '账号不存在'
-      })
-    } else if (user[0].pwd === pwd) {
-      res.send({
-        ok: true,
-        msg: '登录成功',
-        data: user[0],
-        code: 200
-      })
-    } else if (user[0].pwd !== pwd) {
-      res.send({
-        ok: false,
-        msg: '账号或密码错误'
-      })
-    }
-  })
-})
+const Vote = require('../models/vote')
 
 // 添加管理员
-router.post('/adm/add', (req, res) => {
-  // 使用Adm model上的create方法储存数据
+router.post('/vote/add', (req, res) => {
+  // 使用Vote model上的create方法储存数据
   req.body.creTime = new Date()
   req.body.updTime = new Date()
-  Adm.create(req.body, (err, adm) => {
+  Vote.create(req.body, (err, Vote) => {
     if (err) {
       res.json({
         ok: false,
@@ -53,7 +27,7 @@ router.post('/adm/add', (req, res) => {
 })
 
 // 管理员列表
-router.post('/adm/list', (req, res) => {
+router.post('/vote/list', (req, res) => {
   let regId = req.body.regId
   let nameLK = req.body.nameLK
   let pageNum = req.body.pageNum
@@ -66,7 +40,7 @@ router.post('/adm/list', (req, res) => {
   if (nameLK) {
     query.name = new RegExp(nameLK) // 模糊查询条件
   }
-  let dataList = Adm.find(query)
+  let dataList = Vote.find(query)
   // skip是跳过集合中前多少
   dataList.skip((pageNum - 1) * pageSize)
   // 限制返回数
@@ -78,7 +52,7 @@ router.post('/adm/list', (req, res) => {
         msg: err
       })
     } else {
-      Adm.find(query, () => {
+      Vote.find(query, () => {
         res.json({
           ok: true,
           data: data,
@@ -92,8 +66,8 @@ router.post('/adm/list', (req, res) => {
 })
 
 // 通过id获取单条数据
-router.get('/adm/:id', (req, res) => {
-  Adm.findById(req.params.id, (err, data) => {
+router.get('/vote/:id', (req, res) => {
+  Vote.findById(req.params.id, (err, data) => {
     if (err) {
       res.json({
         ok: false,
@@ -110,15 +84,19 @@ router.get('/adm/:id', (req, res) => {
 })
 
 // 更新管理员
-router.post('/adm/upd', (req, res) => {
+router.post('/vote/upd', (req, res) => {
   req.body.updTime = new Date()
-  Adm.findOneAndUpdate({_id: req.body._id}, {
+  Vote.findOneAndUpdate({_id: req.body._id}, {
     $set: {
-      name: req.body.name,
-      regId: req.body.regId,
-      mbl: req.body.mbl,
-      pwd: req.body.pwd,
-      email: req.body.email,
+      name: req.body.title,
+      rmk: req.body.rmk,
+      intro: req.body.intro,
+      options: req.body.options,
+      limit: req.body.limit,
+      rule: req.body.rule,
+      expFm: req.body.expFm,
+      expTo: req.body.expTo,
+      status: req.body.status
     }
   }, {new: true}, (err, data) => {
     if (err) {
@@ -137,8 +115,8 @@ router.post('/adm/upd', (req, res) => {
 })
 
 // 删除一条
-router.get('/adm/del/:id', (req, res) => {
-  Adm.findOneAndRemove({_id: req.params.id}, (err, data) => {
+router.get('/vote/del/:id', (req, res) => {
+  Vote.findOneAndRemove({_id: req.params.id}, (err, data) => {
     if (err) {
       res.json({
         ok: false,

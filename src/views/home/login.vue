@@ -36,9 +36,10 @@ export default {
   methods: {
     // 登录
     onLogin () {
-      this.$http.login(this.form, (rst) => {
+      this.$http.login(this.form, rst => {
         this.$toast('登录成功')
         this.$goto('Home', 1000)
+        sessionStorage.setItem('uid', rst.data._id)
       })
     }
   }

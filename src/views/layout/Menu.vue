@@ -83,6 +83,26 @@ export default {
         }]
       },
       {
+        title: '运营管理',
+        active: false,
+        subs: [{
+          title: '投票管理',
+          href: '/vote/list'
+        }]
+      },
+      {
+        title: '数据统计',
+        active: false,
+        subs: [{
+          title: '交易统计',
+          href: '/sum/trade'
+        },
+        {
+          title: '财务统计',
+          href: '/sum/finance'
+        }]
+      },
+      {
         title: '客户服务',
         active: false,
         subs: [{
@@ -100,18 +120,6 @@ export default {
         {
           title: '建议留言',
           href: '/suggest/list'
-        }]
-      },
-      {
-        title: '数据统计',
-        active: false,
-        subs: [{
-          title: '交易统计',
-          href: '/sum/trade'
-        },
-        {
-          title: '财务统计',
-          href: '/sum/finance'
         }]
       },
       {

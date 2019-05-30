@@ -1,5 +1,6 @@
+// 订单
 var mongoose = require('mongoose')
-var Schema = mongoose.Schema;
+var Schema = mongoose.Schema
 
 var billSchema = new Schema({
   billNo: String

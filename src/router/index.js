@@ -50,6 +50,8 @@ let pages = [
   {path: '/fans/refund/list', meta: {title: '退货订单'}, component: resolve => { require(['@/views/fans/refund/list'], com => { com.default.name = hump('/fans/refund/list'); resolve(com) }) }},
   // 会员管理
   {path: '/member/list', meta: {title: '会员列表'}, component: resolve => { require(['@/views/member/list'], com => { com.default.name = hump('/member/list'); resolve(com) }) }},
+  // 运营管理
+  {path: '/vote/list', meta: {title: '投票管理'}, component: resolve => { require(['@/views/vote/list'], com => { com.default.name = hump('/vote/list'); resolve(com) }) }},
   // 营销工具
   {path: '/tool/list', meta: {title: '工具列表'}, component: resolve => { require(['@/views/tool/list'], com => { com.default.name = hump('/tool/list'); resolve(com) }) }},
   {path: '/market/list', meta: {title: '营销历史'}, component: resolve => { require(['@/views/market/list'], com => { com.default.name = hump('/market/list'); resolve(com) }) }},
@@ -62,7 +64,7 @@ let pages = [
   {path: '/message/list', meta: {title: '系统消息'}, component: resolve => { require(['@/views/message/list'], com => { com.default.name = hump('/message/list'); resolve(com) }) }},
   {path: '/complain/list', meta: {title: '投诉列表'}, component: resolve => { require(['@/views/complain/list'], com => { com.default.name = hump('/complain/list'); resolve(com) }) }},
   {path: '/reply/list', meta: {title: '咨询回复'}, component: resolve => { require(['@/views/reply/list'], com => { com.default.name = hump('/reply/list'); resolve(com) }) }},
-  {path: '/', redirect: '/index'}
+  {path: '/', redirect: '/home'}
 ]
 
 // 组件列表
@@ -72,6 +74,7 @@ let components = [
   {name: 'Upload', component: resolve => { require(['@/components/upload'], resolve) }},
   {name: 'Pager', component: resolve => { require(['@/components/pager'], resolve) }},
   {name: 'Areas', component: resolve => { require(['@/components/areas'], resolve) }},
+  {name: 'DateTime', component: resolve => { require(['@/components/datetime'], resolve) }},
   {name: 'Time', component: resolve => { require(['@/components/time'], resolve) }},
   // 商圈管理
   {name: 'businessAdd', component: resolve => { require(['@/views/business/add'], resolve) }},
@@ -100,7 +103,13 @@ let components = [
   {name: 'admAdd', component: resolve => { require(['@/views/adm/add'], resolve) }},
   {name: 'admEdit', component: resolve => { require(['@/views/adm/edit'], resolve) }},
   // 退款订单
-  {name: 'refundDetail', component: resolve => { require(['@/views/refund/detail'], resolve) }}
+  {name: 'refundDetail', component: resolve => { require(['@/views/refund/detail'], resolve) }},
+  // 品牌管理
+  {name: 'voteAdd', component: resolve => { require(['@/views/vote/add'], resolve) }},
+  {name: 'voteDetail', component: resolve => { require(['@/views/vote/detail'], resolve) }},
+  {name: 'voteEdit', component: resolve => { require(['@/views/vote/edit'], resolve) }},
+  {name: 'voteTake', component: resolve => { require(['@/views/vote/take'], resolve) }},
+  {name: 'voteRank', component: resolve => { require(['@/views/vote/rank'], resolve) }}
 ]
 
 // 组件

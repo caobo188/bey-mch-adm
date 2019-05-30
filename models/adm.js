@@ -1,5 +1,6 @@
+// 管理员
 var mongoose = require('mongoose')
-var Schema = mongoose.Schema;
+var Schema = mongoose.Schema
 
 var admSchema = new Schema({
   id: Number, // 系统id

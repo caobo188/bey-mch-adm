@@ -7,11 +7,16 @@ var APP_API_PREFIX = BASE_SERVER
 // 系统标识
 var SYS_ID = 'plt.tfc.mch'
 // 应用对象
-var APP_APIS = ['Adm', 'Goods', 'Bill']
+var APP_APIS = ['Adm', 'Goods', 'Bill', 'Vote', 'Record']
 // 自定义API
 var CST_APIS = {
   'login': {
     uri: '/login',
+    type: 'post'
+  },
+  // 投票结果
+  'voteRank': {
+    uri: '/record/rank',
     type: 'post'
   }
 }
