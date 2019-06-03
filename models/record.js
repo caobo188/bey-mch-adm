@@ -4,7 +4,7 @@ var Schema = mongoose.Schema
 
 var recordSchema = new Schema({
   id: String, // 系统id
-  vid: String, // 投票id
+  vid: { type: Schema.Types.String, ref: 'vote' }, // 投票id
   uid: String, // 投票人id
   elects: Array, // 选票
   creTime: {type: Date, default: Date.now()} // 创建时间

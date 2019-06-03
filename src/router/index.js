@@ -109,6 +109,7 @@ let components = [
   {name: 'voteDetail', component: resolve => { require(['@/views/vote/detail'], resolve) }},
   {name: 'voteEdit', component: resolve => { require(['@/views/vote/edit'], resolve) }},
   {name: 'voteTake', component: resolve => { require(['@/views/vote/take'], resolve) }},
+  {name: 'voteRecord', component: resolve => { require(['@/views/vote/record'], resolve) }},
   {name: 'voteRank', component: resolve => { require(['@/views/vote/rank'], resolve) }}
 ]
 

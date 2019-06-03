@@ -6,9 +6,10 @@ var Bill = require('../models/bill');
 router.post('/bill/list', function (req,res,next) {
   let pageNum = req.body.pageNum
   let pageSize = req.body.pageSize
+  let creTime = req.body.creTime === 1 ? 1 : -1
   // 检索条件
   let query = {}
-  let dataList = Bill.find(query)
+  let dataList = Bill.find(query).sort({'creTime': creTime})
   // skip是跳过集合中前多少
   dataList.skip((pageNum - 1) * pageSize)
   // 限制返回数

@@ -13,7 +13,7 @@
           <tbody>
             <tr v-for="(rank, idx) in rankList" :key="idx">
               <td>{{idx + 1}}</td>
-              <td>{{rank.name}}</td>
+              <td>{{rank.title}}</td>
               <td>{{rank.count}}</td>
             </tr>
           </tbody>

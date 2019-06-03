@@ -26,12 +26,13 @@ router.post('/vote/add', (req, res) => {
   })
 })
 
-// 管理员列表
+// 投票列表
 router.post('/vote/list', (req, res) => {
   let regId = req.body.regId
   let nameLK = req.body.nameLK
   let pageNum = req.body.pageNum
   let pageSize = req.body.pageSize
+  let creTime = req.body.creTime === 1 ? 1 : -1
   // 检索条件，如果为空不赋值
   let query = {}
   if (regId) {
@@ -40,7 +41,7 @@ router.post('/vote/list', (req, res) => {
   if (nameLK) {
     query.name = new RegExp(nameLK) // 模糊查询条件
   }
-  let dataList = Vote.find(query)
+  let dataList = Vote.find(query).sort({'creTime': creTime})
   // skip是跳过集合中前多少
   dataList.skip((pageNum - 1) * pageSize)
   // 限制返回数

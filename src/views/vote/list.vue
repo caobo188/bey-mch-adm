@@ -32,6 +32,7 @@
             <td>
               <a href="javascript: void(0)" @click="onEdit(idx)" class="margin-r-15">编辑</a>
               <a href="javascript: void(0)" @click="onVote(idx)" class="margin-r-15">投票</a>
+              <a href="javascript: void(0)" @click="onRecord(idx)" class="margin-r-15">记录</a>
               <a href="javascript: void(0)" @click="onRank(idx)" class="margin-r-15">结果</a>
               <a href="javascript: void(0)" @click="onDele(idx)">删除</a>
             </td>
@@ -83,6 +84,11 @@ export default {
       this.$layer.open('voteTake', '投票', {id: vote._id}, () => {
         this.$toast('投票成功')
         this.getVoteList()
+      })
+    },
+    onRecord (i) {
+      let vote = this.voteList[i]
+      this.$layer.open('voteRecord', '投票结果', {id: vote._id}, () => {
       })
     },
     onRank (i) {

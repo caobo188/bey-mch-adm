@@ -12,16 +12,18 @@ let record = require('./routes/record')
 
 //这一句是连接上数据库
 var db = mongoose.connect('mongodb://localhost:27017/meiyi')
-
 //这里的meiyi是数据库的名字，不是表的名字
+
 Array.prototype.groupBy = function(name, filter) {
   var groups = [], grp, mapping = {}
-  for(var i = 0, item, v, rtn; item = this[i++];) {
+  for(var i = 0, item, v, t, rtn; item = this[i++];) {
     v = item[name]
     grp = mapping[v]
+    t = item.title
     if(!grp) {
       grp = {
         name: v,
+        title: t,
         count: 0
       }
       mapping[v] = grp
@@ -36,6 +38,7 @@ Array.prototype.groupBy = function(name, filter) {
   }
   return groups
 }
+
 const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))

@@ -20,7 +20,6 @@ export default {
     }
   },
   created () {
-    // this.open('toast')
   },
   methods: {
     open (name, title, params, okCb, cancelCb) {

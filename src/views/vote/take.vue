@@ -10,7 +10,7 @@
           <label class="form-label">选项</label>
           <div class="input-block">
             <label class="check-label" v-for="(opt, idx) in vote.options">
-              <input type="checkbox" name="vote-item" v-model="form.elects" :value="opt._id" :key="idx"/> {{opt.name}}
+              <input type="checkbox" name="vote-item" v-model="optChk" :value="idx" :key="idx"/> {{opt.name}}
             </label>
           </div>
         </div>
@@ -35,7 +35,8 @@ export default {
         vid: '', // 投票活动id
         uid: '', // 投票人id
         elects: [] // 选项拼接
-      }
+      },
+      optChk: []
     }
   },
   beforeCreate () {
@@ -52,6 +53,11 @@ export default {
     },
     onSave () {
       this.form.uid = sessionStorage.getItem('uid')
+      let list = []
+      for (let item of this.optChk) {
+        list.push(this.vote.options[item])
+      }
+      this.form.elects = list
       this.$http.addRecord(this.form, rst => {
         this.cfg.ok(rst)
       })
