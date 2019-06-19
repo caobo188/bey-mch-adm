@@ -17,6 +17,7 @@ service.interceptors.request.use(
   },
   error => {
     // do something with request error
+    alert(error)
     console.log(error) // for debug
     // return Promise.reject(error)
   }
@@ -37,11 +38,13 @@ service.interceptors.response.use(
       } else if (req.failCb) {
         req.failCb(res)
       } else {
+        alert('请求错误：' + res.msg)
         console.log('请求错误：' + res.msg)
       }
     }
   },
   error => {
+    alert('err' + error)
     console.log('err' + error) // for debug
     // return Promise.reject(error)
   }

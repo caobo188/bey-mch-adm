@@ -68,6 +68,10 @@ export default {
         {
           title: '商品评价',
           href: '/eva/list'
+        },
+        {
+          title: '购买商品',
+          href: '/order/list'
         }]
       },
       {

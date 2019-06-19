@@ -5,6 +5,8 @@ var Goods = require('../models/goods');
 
 // 新增商品
 router.post('/goods/add', function (req,res,next) {
+  req.body.creTime = new Date()
+  req.body.updTime = new Date()
   Goods.create(req.body, (err, hero) => {
     if (err) {
       res.json({

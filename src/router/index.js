@@ -38,6 +38,7 @@ let pages = [
   {path: '/cate/list', meta: {title: '商品分类'}, component: resolve => { require(['@/views/cate/list'], com => { com.default.name = hump('/cate/list'); resolve(com) }) }},
   {path: '/group/list', meta: {title: '商品分组'}, component: resolve => { require(['@/views/group/list'], com => { com.default.name = hump('/group/list'); resolve(com) }) }},
   {path: '/eva/list', meta: {title: '商品评价'}, component: resolve => { require(['@/views/eva/list'], com => { com.default.name = hump('/eva/list'); resolve(com) }) }},
+  {path: '/order/list', meta: {title: '购买商品'}, component: resolve => { require(['@/views/order/list'], com => { com.default.name = hump('/order/list'); resolve(com) }) }},
   // 订单管理
   {path: '/bill/list', meta: {title: '订单列表'}, component: resolve => { require(['@/views/bill/list'], com => { com.default.name = hump('/bill/list'); resolve(com) }) }},
   {path: '/undelive/list', meta: {title: '待发货订单'}, component: resolve => { require(['@/views/undelive/list'], com => { com.default.name = hump('/undelive/list'); resolve(com) }) }},
@@ -104,13 +105,15 @@ let components = [
   {name: 'admEdit', component: resolve => { require(['@/views/adm/edit'], resolve) }},
   // 退款订单
   {name: 'refundDetail', component: resolve => { require(['@/views/refund/detail'], resolve) }},
-  // 品牌管理
+  // 投票管理
   {name: 'voteAdd', component: resolve => { require(['@/views/vote/add'], resolve) }},
   {name: 'voteDetail', component: resolve => { require(['@/views/vote/detail'], resolve) }},
   {name: 'voteEdit', component: resolve => { require(['@/views/vote/edit'], resolve) }},
   {name: 'voteTake', component: resolve => { require(['@/views/vote/take'], resolve) }},
   {name: 'voteRecord', component: resolve => { require(['@/views/vote/record'], resolve) }},
-  {name: 'voteRank', component: resolve => { require(['@/views/vote/rank'], resolve) }}
+  {name: 'voteRank', component: resolve => { require(['@/views/vote/rank'], resolve) }},
+  // 购买商品
+  {name: 'orderAdd', component: resolve => { require(['@/views/order/add'], resolve) }}
 ]
 
 // 组件

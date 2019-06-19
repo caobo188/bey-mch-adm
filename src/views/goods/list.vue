@@ -42,7 +42,7 @@
                 <p><span>商品编号：</span>2016100956745345435</p>
                 <p><span>商品分类：</span>卡片/加油卡</p>
                 <p><span>品牌：</span>中石化</p>
-                <p><span>创建时间：</span>2016-09-24 12:34:45</p>
+                <p><span>创建时间：</span>{{goods.creTime | format('yyyy-MM-dd hh:mm')}}5</p>
               </div>
             </td>
             <td class="text-green">已上架</td>

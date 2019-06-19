@@ -63,11 +63,11 @@
           <div class="form-item">
             <label class="form-label"><b class="color-red">*</b> 售价类型</label>
             <div class="input-inline">
-              <label class="check-label"><input type="radio" name="sale-type" v-model="form.saleType" value="1"/> 分类出售</label>
-              <label class="check-label"><input type="radio" name="sale-type" v-model="form.saleType" value="2"/> 一口价</label>
+              <label class="check-label"><input type="radio" name="sale-type" v-model="saleType" value="1"/> 分类出售</label>
+              <label class="check-label"><input type="radio" name="sale-type" v-model="saleType" value="2"/> 一口价</label>
             </div>
           </div>
-          <div v-show="form.saleType == 1">
+          <div v-show="saleType == 1">
             <div class="form-item">
               <label class="form-label"><b class="color-red">*</b> 属性</label>
               <div class="input-block">
@@ -134,7 +134,7 @@
               </div>
             </div>
           </div>
-          <div v-show="form.saleType == 2">
+          <div v-show="saleType == 2">
             <div class="form-item">
               <label class="form-label"><b class="color-red">*</b> 一口价及总库存</label>
               <div class="input-block">
@@ -153,8 +153,8 @@
                     <tr>
                       <td class="edit-td"><input type="text" class="edit-input"/></td>
                       <td class="edit-td"><input type="text" class="edit-input"/></td>
-                      <td class="edit-td"><input type="text" class="edit-input"/></td>
-                      <td class="edit-td"><input type="text" class="edit-input"/></td>
+                      <td class="edit-td"><input type="text" class="edit-input" v-model="form.salePrice"/></td>
+                      <td class="edit-td"><input type="number" class="edit-input" v-model="form.stock"/></td>
                       <td class="edit-td"><input type="text" class="edit-input"/></td>
                       <td class="edit-td"><input type="text" class="edit-input"/></td>
                     </tr>
@@ -225,9 +225,11 @@ export default {
       visible: true,
       step: 0, // 上、下一步切换
       subList: [], // 商品属性集合
+      saleType: 1,
       form: {
-        saleType: 1,
         name: '',
+        salePrice: '',
+        stock: ''
       },
       natList: [
         {
@@ -269,20 +271,9 @@ export default {
       this.initList()
     },
     onSave () {
-      request({
-        url: './goods/add',
-        method: "post",
-        data: this.form
-      })
-      .then(response => {
-        if(response.data.status == 'success') {
-          this.$toast('新增成功')
-        } else {
-          this.$alert('新增失败')
-        }
-      })
-      .catch(error => {
-        console.log(error)
+      this.$http.addGoods(this.form, rst => {
+        this.$toast('新增成功')
+        this.$goto('GoodsList')
       })
     },
     onClose () {

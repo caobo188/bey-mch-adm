@@ -79,7 +79,7 @@ router.post('/record/rank', (req, res) => {
     }
     res.json({
       ok: true,
-      data: arr,
+      data: list.groupBy('oid'),
       code: 200
     })
   })
